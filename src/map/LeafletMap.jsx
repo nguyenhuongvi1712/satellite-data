@@ -1,5 +1,9 @@
 import React from "react";
-import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  ZoomControl,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { MyPopup, OWMTileLayer, SearchBar } from "../components";
 import GeneralInfo from "../components/GeneralInfo";
@@ -7,8 +11,8 @@ import GeneralInfo from "../components/GeneralInfo";
 const LeafletMap = () => {
   return (
     <MapContainer
-      center={[21.0038, 105.839]}
-      zoom={13}
+      center={[53.36254, -172.06214]}
+      zoom={5}
       zoomControl={false}
       className="h-full w-full relative"
       style={{ zIndex: 0 }}
@@ -18,10 +22,10 @@ const LeafletMap = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <ZoomControl position="topright" />
-      <SearchBar />
-      <MyPopup />
+      {/* <SearchBar /> */}
+      {/* <MyPopup /> */}
       <OWMTileLayer />
-      <GeneralInfo />
+      {/* <GeneralInfo /> */}
     </MapContainer>
   );
 };

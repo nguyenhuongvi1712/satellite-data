@@ -1,4 +1,4 @@
-import { CURRENT_WEATHER_API, WEATHER_FORECAST_API } from "./baseUrl";
+import { CURRENT_WEATHER_API, WEATHER_FORECAST_API, SATELLITE_API } from "./baseUrl";
 import axios from "axios";
 
 export const OWM_API_KEY = "d0672c5951da1c0fd99d64e85831f77a";
@@ -42,3 +42,25 @@ export const getForecastWeather = async (lat, lon, limit = 10) => {
     console.log(err);
   }
 };
+
+export const getDataSets = async () => {
+  try {
+    const res = await axios.get(`${SATELLITE_API}/datasets`)
+    if (res.status !== 200) return [];
+    return res.data.data;
+  } catch (error) {
+    console.log(err);
+    return []
+  }
+}
+
+export const getResults = async () => {
+  try {
+    const res = await axios.get(`${SATELLITE_API}/datasets-results`)
+    if (res.status !== 200) return [];
+    return res.data.data;
+  } catch (error) {
+    console.log(err);
+    return []
+  }
+}

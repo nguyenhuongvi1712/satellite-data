@@ -24,6 +24,10 @@ const reducer = (state, action) => {
       return { ...state, isLoadingInfo: action.isLoadingInfo };
     case actionType.SET_FORECAST_DATA:
       return { ...state, forecastData: action.forecastData };
+    case actionType.SET_USGS_DATA:
+      return {
+        ...state, usgsData: action.usgsData
+      }
     default:
       return state;
   }

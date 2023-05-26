@@ -13,6 +13,7 @@ const OWMTileLayer = () => {
       <TileLayer
         url={`https://tile.openweathermap.org/map/${mapMode.layer}/{z}/{x}/{y}.png?appid=${OWM_API_KEY}`}
       />
+
     </>
   ) : null;
 };
