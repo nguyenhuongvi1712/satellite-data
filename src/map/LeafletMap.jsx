@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -7,11 +7,22 @@ import {
 import "leaflet/dist/leaflet.css";
 import { MyPopup, OWMTileLayer, SearchBar } from "../components";
 import GeneralInfo from "../components/GeneralInfo";
+import USGSTileLayer from '../components/USGSTIleLayer';
+import { useStateValue } from '../context/StateProvider';
+import { Map } from 'leaflet';
 
 const LeafletMap = () => {
+  const [{ center }] = useStateValue();
+  const map = useRef()
+
+  useEffect(() => {
+    console.log('map', map.current)
+  }, [center])
+
   return (
     <MapContainer
-      center={[53.36254, -172.06214]}
+      center={center}
+      ref={map}
       zoom={5}
       zoomControl={false}
       className="h-full w-full relative"
@@ -25,6 +36,7 @@ const LeafletMap = () => {
       {/* <SearchBar /> */}
       {/* <MyPopup /> */}
       <OWMTileLayer />
+      <USGSTileLayer />
       {/* <GeneralInfo /> */}
     </MapContainer>
   );
