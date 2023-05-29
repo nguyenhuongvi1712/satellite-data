@@ -7,7 +7,8 @@ export const actionType = {
 	SET_IS_LOADING_INFO: 'SET_IS_LOADING_INFO',
 	SET_FORECAST_DATA: 'SET_FORECAST_DATA',
 	SET_USGS_DATA: 'SET_USGS_DATA',
-    SET_CENTER: 'SET_CENTER'
+	SET_CENTER: 'SET_CENTER',
+	SET_DATASET_IDS: 'SET_DATASET_IDS'
 };
 
 const reducer = (state, action) => {
@@ -35,7 +36,12 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				center: action.center,
-			};
+		  };
+		case actionType.SET_DATASET_IDS:
+		  return {
+			  ...state,
+			  dataSetIds: action.dataSetIds
+			}
 		default:
 			return state;
   }

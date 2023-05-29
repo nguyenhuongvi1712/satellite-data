@@ -77,7 +77,7 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
           </Tabs>
         </div>
         <TabPanel value={currentTab} index={0}>
-          <DataSetTab dataSets={dataSets} />
+          <DataSetTab dataSets={dataSets} onChangeTab={()=> setCurrentTab(1)} />
         </TabPanel>
         <TabPanel value={currentTab} index={1}>
           <ResultTab results={results} />

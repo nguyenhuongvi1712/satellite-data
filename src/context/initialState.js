@@ -7,5 +7,6 @@ export const initialState = {
 	isLoadingInfo: true,
 	forecastData: null,
 	usgsData: [],
+	dataSetIds: [],
 	center: [53.36254, -172.06214],
 };
