@@ -9,6 +9,7 @@ import PropTypes from "prop-types"
 import { useState } from "react"
 import DataSetTab from "../DataTab"
 import ResultTab from "../ResultTab"
+import SearchCriteriaTab from "../SearchCriteriaTab"
 import Logo from "./Logo"
 import "./Sidebar.scss"
 const drawerWidth = 400;
@@ -61,6 +62,7 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: drawerWidth,
+            overflowY: "inherit",
           },
         }}
         open
@@ -73,13 +75,20 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
             aria-label="basic tabs example"
           >
             <Tab label="Data sets" {...a11yProps(0)} />
-            <Tab label="Result" {...a11yProps(1)} />
+            <Tab label="Enter Search Criteria" {...a11yProps(1)} />
+            <Tab label="Result" {...a11yProps(2)} />
           </Tabs>
         </div>
-        <TabPanel value={currentTab} index={0}>
-          <DataSetTab dataSets={dataSets} onChangeTab={()=> setCurrentTab(1)} />
+        <TabPanel value={currentTab} index={0} style={{ overflowY: "auto" }}>
+          <DataSetTab
+            dataSets={dataSets}
+            onChangeTab={() => setCurrentTab(1)}
+          />
         </TabPanel>
-        <TabPanel value={currentTab} index={1}>
+        <TabPanel value={currentTab} index={1} style={{ overflowY: "auto" }}>
+          <SearchCriteriaTab />
+        </TabPanel>
+        <TabPanel value={currentTab} index={2} style={{ overflowY: "auto" }}>
           <ResultTab results={results} />
         </TabPanel>
       </Drawer>
