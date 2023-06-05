@@ -6,14 +6,15 @@ import GeneralInfo from "../components/GeneralInfo";
 import USGSTileLayer from '../components/USGSTIleLayer';
 import { useStateValue } from '../context/StateProvider';
 
+
+function SetViewOnClick({ center }) {
+  const map = useMap();
+  map.setView(center, map.getZoom());
+
+  return null;
+}
 const LeafletMap = () => {
   const [{ center }] = useStateValue();
-  // const map = useMap()
-
-
-  useEffect(() => {
-    // console.log('map', map)
-  }, [center])
 
   return (
     <>
@@ -34,6 +35,7 @@ const LeafletMap = () => {
         <OWMTileLayer />
         <USGSTileLayer />
         {/* <GeneralInfo /> */}
+        <SetViewOnClick center={center} />
       </MapContainer>
     </>
   );

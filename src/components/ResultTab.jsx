@@ -22,7 +22,6 @@ const ResultTab = ({ results }) => {
           usgsData
         });
         const lastItem = usgsData[usgsData.length -1]
-        console.log('lastItem', lastItem)
         dispatch({
           type: actionType.SET_CENTER,
           center: [lastItem.lat, lastItem.long]
