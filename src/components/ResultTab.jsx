@@ -9,6 +9,9 @@ const ResultTab = ({ results }) => {
   const isChecked = (id) => {
     return usgsData.findIndex((e) => e.id === id) !== -1 ? true : false;
   };
+  const isExistCart = (id) => {
+    return cartItems.findIndex((e) => e.id === id) !== -1 ? true : false;
+  };
   const handleOnClick = (id) => {
     const index = results.findIndex((e) => e.id === id);
     if (index !== -1) {
@@ -71,7 +74,7 @@ const ResultTab = ({ results }) => {
                     <IconButton onClick={() => handleOnClick(item.id)}>
                       <CollectionsIcon />
                     </IconButton>
-                    <IconButton onClick={() => handleOnAddToCart(item)}>
+                    <IconButton onClick={() => handleOnAddToCart(item)} disabled={isExistCart(item.id)}>
                       <AddShoppingCartIcon />
                     </IconButton>
                   </div>

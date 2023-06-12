@@ -54,15 +54,15 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
       <Drawer
         variant="permanent"
         sx={{
-          display: { xs: "none", sm: "block" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
+            boxSizing: "border-box",
             overflowY: "inherit",
-            overflowX: "hidden"
+            overflowX: "hidden",
           },
         }}
-        open
       >
         <div className="logo d-flex justify-between align-center">
           <TextField
@@ -89,7 +89,11 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
             onChangeTab={() => setCurrentTab(1)}
           />
         </TabPanel>
-        <TabPanel value={currentTab} index={1} style={{ overflowY: "auto", overflowX: 'hidden' }}>
+        <TabPanel
+          value={currentTab}
+          index={1}
+          style={{ overflowY: "auto", overflowX: "hidden" }}
+        >
           <ResultTab results={results} />
         </TabPanel>
       </Drawer>
