@@ -1,17 +1,13 @@
-import {
-  Box,
-  Drawer,
-  Tab,
-  Tabs
-} from "@mui/material"
-import PropTypes from "prop-types"
+import { Box, Drawer, Tab, Tabs, TextField } from "@mui/material";
+import PropTypes from "prop-types";
 
-import { useState } from "react"
-import DataSetTab from "../DataTab"
-import ResultTab from "../ResultTab"
-import SearchCriteriaTab from "../SearchCriteriaTab"
-import Logo from "./Logo"
-import "./Sidebar.scss"
+import { useState } from "react";
+import DataSetTab from "../DataTab";
+import ResultTab from "../ResultTab";
+import SearchCriteriaTab from "../SearchCriteriaTab";
+import FilterDropdown from "./FilterDropdown";
+
+import "./Sidebar.scss";
 const drawerWidth = 400;
 
 const TabPanel = (props) => {
@@ -63,20 +59,28 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
             boxSizing: "border-box",
             width: drawerWidth,
             overflowY: "inherit",
+            overflowX: "hidden"
           },
         }}
         open
       >
+        <div className="logo d-flex justify-between align-center">
+          <TextField
+            hiddenLabel
+            id="filled-hidden-label-small"
+            placeholder="Search location ..."
+            size="small"
+          />
+          <FilterDropdown />
+        </div>
         <div className="logo">
-          <Logo />
           <Tabs
             value={currentTab}
             onChange={handleChangeTab}
             aria-label="basic tabs example"
           >
             <Tab label="Data sets" {...a11yProps(0)} />
-            <Tab label="Enter Search Criteria" {...a11yProps(1)} />
-            <Tab label="Result" {...a11yProps(2)} />
+            <Tab label="Result" {...a11yProps(1)} />
           </Tabs>
         </div>
         <TabPanel value={currentTab} index={0} style={{ overflowY: "auto" }}>
@@ -85,10 +89,7 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
             onChangeTab={() => setCurrentTab(1)}
           />
         </TabPanel>
-        <TabPanel value={currentTab} index={1} style={{ overflowY: "auto" }}>
-          <SearchCriteriaTab />
-        </TabPanel>
-        <TabPanel value={currentTab} index={2} style={{ overflowY: "auto" }}>
+        <TabPanel value={currentTab} index={1} style={{ overflowY: "auto", overflowX: 'hidden' }}>
           <ResultTab results={results} />
         </TabPanel>
       </Drawer>

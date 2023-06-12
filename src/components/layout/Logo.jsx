@@ -1,7 +1,7 @@
 const style = {
     fontSize: '1.5rem',
     fontWeight: 800,
-    color: "#478DF0"
+    color: "#ffffff"
 }
 const Logo = () => {
     return <>

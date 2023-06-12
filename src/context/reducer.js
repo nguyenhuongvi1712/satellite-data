@@ -8,7 +8,9 @@ export const actionType = {
 	SET_FORECAST_DATA: 'SET_FORECAST_DATA',
 	SET_USGS_DATA: 'SET_USGS_DATA',
 	SET_CENTER: 'SET_CENTER',
-	SET_DATASET_IDS: 'SET_DATASET_IDS'
+	SET_DATASET_IDS: 'SET_DATASET_IDS',
+	ADD_TO_CART: 'ADD_TO_CART',
+	REMOVE_CART_ITEM: 'REMOVE_CART_ITEM'
 };
 
 const reducer = (state, action) => {
@@ -41,6 +43,22 @@ const reducer = (state, action) => {
 		  return {
 			  ...state,
 			  dataSetIds: action.dataSetIds
+		  }
+		case actionType.ADD_TO_CART: 
+			var newCartItems = state.cartItems
+			newCartItems.push(action.item)
+			return {
+				...state,
+				cartItems: newCartItems
+		  }
+	  	case actionType.REMOVE_CART_ITEM: 
+			var newCartItems = state.cartItems
+		  	var index = newCartItems.findIndex(e => e.id === action.id)
+		  	if (index !== -1)
+				newCartItems.splice(index, 1)
+			return {
+				...state,
+				cartItems: newCartItems
 			}
 		default:
 			return state;

@@ -1,24 +1,14 @@
 import "./App.css";
 //MUI
-import MenuIcon from "@mui/icons-material/Menu";
-import {
-  AppBar,
-  Box,
-  CssBaseline,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 // components
-import { InfoBox, LegendLayer } from "./components";
-import Menu from "./components/Menu";
+import { useEffect, useState } from "react";
+import { getDataSets, getResults } from "./apis";
+import datasets_sample from "./common/mock/datasets_sample";
+import Header from "./components/layout/Header";
 import Sidebar from "./components/layout/Sidebar";
 import LeafletMap from "./map/LeafletMap";
 const drawerWidth = 400;
-import { useEffect, useState } from "react";
-import datasets_sample from "./common/mock/datasets_sample";
-import { getDataSets, getResults } from "./apis";
-
 function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -47,7 +37,8 @@ function App() {
   }, []);
   return (
     <Box sx={{ display: "flex" }}>
-      {/* <CssBaseline /> */}
+      <CssBaseline />
+      <Header />
       <Sidebar
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}

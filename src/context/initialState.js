@@ -9,4 +9,5 @@ export const initialState = {
 	usgsData: [],
 	dataSetIds: [],
 	center: [53.36254, -172.06214],
+	cartItems: []
 };
