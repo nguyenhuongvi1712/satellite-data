@@ -4,6 +4,7 @@ import LeafletMap from "../map/LeafletMap";
 import { useEffect, useState } from "react";
 import { getResults, getDataSets } from "../apis";
 const drawerWidth = 400;
+import datasets_sample from "../common/mock/datasets_sample";
 const MapPage = () => {
   const [dataSets, setDataSets] = useState([]);
   const [results, setResults] = useState([]);

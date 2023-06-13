@@ -61,6 +61,7 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
             boxSizing: "border-box",
             overflowY: "inherit",
             overflowX: "hidden",
+            paddingTop: 0.5,
           },
         }}
       >
