@@ -11,7 +11,8 @@ export const actionType = {
 	SET_DATASET_IDS: 'SET_DATASET_IDS',
 	ADD_TO_CART: 'ADD_TO_CART',
 	REMOVE_CART_ITEM: 'REMOVE_CART_ITEM',
-	SET_DATA_GOOGLE_EARTH_ENGINE: 'SET_DATA_GOOGLE_EARTH_ENGINE'
+	SET_DATA_GOOGLE_EARTH_ENGINE: 'SET_DATA_GOOGLE_EARTH_ENGINE',
+	SET_BOUND_POSITION: 'SET_BOUND_POSITION'
 };
 
 const reducer = (state, action) => {
@@ -67,7 +68,14 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				dataGoogleEarthEngine: action.value
+		  }
+	  case actionType.SET_BOUND_POSITION: 
+				return {
+					...state,
+					boundPosition: action.value,
+					zoom: action.value.mapView ? 5 : 20
 			}
+		
 		default:
 			return state;
   }

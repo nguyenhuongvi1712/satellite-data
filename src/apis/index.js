@@ -53,7 +53,7 @@ export const getDataSets = async () => {
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
-		console.log(err);
+		console.log(error);
 		return [];
 	}
 };
@@ -64,7 +64,7 @@ export const getResults = async () => {
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
-		console.log(err);
+		console.log(error);
 		return [];
 	}
 };
@@ -77,7 +77,7 @@ export const getPositionByLatLon = async ({ lat, lon, radius }) => {
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
-        console.log(err);
+        console.log(error);
 		return [];
     }
 };
@@ -88,7 +88,7 @@ export const renderNavbar = async () => {
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
-		console.log(err);
+		console.log(error);
 		return [];
 	}
 }
@@ -99,7 +99,18 @@ export const getImageGoogleEarthEngine = async ({channelId}) => {
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
-		console.log(err);
+		console.log(error);
 		return [];
+	}
+}
+
+export const autoSuggest = async ({keyword}) => {
+	try {
+		const apiKey = "FKQbWs-wrePG3l2YwMYSSbLqDjBesyQkSZSYg8iUmmk"
+		const res = await axios.get(`https://autosuggest.search.hereapi.com/v1/autosuggest?at=0,0&q=${keyword}&apiKey=${apiKey}`)
+		return res.data
+	} catch (error) {
+		console.log(error)
+		return []
 	}
 }

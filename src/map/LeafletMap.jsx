@@ -6,6 +6,7 @@ import GeneralInfo from "../components/GeneralInfo";
 import USGSTileLayer from '../components/TileLayer/USGSTIleLayer';
 import GoogleEarthEngine from "../components/TileLayer/GoogleEarthEngineTileLayer";
 import { useStateValue } from '../context/StateProvider';
+import BoundPosition from "../components/BoundPosition";
 
 
 function SetViewOnClick({ center }) {
@@ -15,14 +16,13 @@ function SetViewOnClick({ center }) {
   return null;
 }
 const LeafletMap = () => {
-  const [{ center }] = useStateValue();
+  const [{ center, zoom }] = useStateValue();
 
   return (
     <>
       <MapContainer
         center={center}
-        zoom={5}
-        zoomControl={false}
+        zoom={zoom}
         className="h-full w-full relative"
         style={{ zIndex: 0 }}
       >
@@ -36,6 +36,7 @@ const LeafletMap = () => {
         <OWMTileLayer />
         <USGSTileLayer />
         <GoogleEarthEngine />
+        <BoundPosition />
         {/* <GeneralInfo /> */}
         <SetViewOnClick center={center} />
       </MapContainer>

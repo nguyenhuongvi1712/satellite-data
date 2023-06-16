@@ -8,6 +8,7 @@ import SearchCriteriaTab from "../SearchCriteriaTab";
 import FilterDropdown from "./FilterDropdown";
 import SearchLocation from "./SearchLocation";
 import SatelliteData from "./SatelliteData";
+import SearchLocationBar from "./SearchLocationBar";
 
 import "./Sidebar.scss";
 const drawerWidth = 400;
@@ -74,7 +75,7 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
             placeholder="Search location ..."
             size="small"
           /> */}
-          <SearchLocation />
+          <SearchLocationBar />
           <FilterDropdown />
         </div>
         {/* <div className="logo">

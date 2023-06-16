@@ -65,7 +65,6 @@ export default function SearchLocation() {
 
     if (inputValue === "") {
       setOptions(value ? [value] : []);
-      console.log('option', options)
       return undefined;
     }
 
@@ -82,7 +81,6 @@ export default function SearchLocation() {
         }
 
         setOptions(newOptions);
-        console.log("option", options);
 
       }
     });
@@ -108,7 +106,6 @@ export default function SearchLocation() {
       noOptionsText="No locations"
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
-        console.log("option 2", options);
         setValue(newValue);
       }}
       onInputChange={(event, newInputValue) => {

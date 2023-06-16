@@ -10,5 +10,7 @@ export const initialState = {
 	dataSetIds: [],
 	center: [53.36254, -172.06214],
 	cartItems: JSON.parse(localStorage.getItem('cartItems')) ?? [],
-	dataGoogleEarthEngine: null
+	dataGoogleEarthEngine: null,
+	boundPosition: {},
+	zoom: 5
 };
