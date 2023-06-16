@@ -63,6 +63,15 @@ const StyledMenu = styled((props) => (
   },
 }));
 
+const FilterButton = styled(Button)(({ theme }) => ({
+  color: 'rgb(38, 42, 89)',
+  border: "1px solid rgb(38, 42, 89)",
+  "&:hover": {
+    backgroundColor: 'rgba(38, 42, 89, 0.04)',
+    border: "1px solid rgb(38, 42, 89)",
+  },
+}));
+
 const FilterDropdown = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -75,7 +84,7 @@ const FilterDropdown = () => {
 
   return (
     <div>
-      <Button
+      <FilterButton
         id="demo-customized-button"
         aria-controls={open ? "demo-customized-menu" : undefined}
         aria-haspopup="true"
@@ -86,7 +95,7 @@ const FilterDropdown = () => {
         endIcon={<KeyboardArrowDownIcon />}
       >
         Filters
-      </Button>
+      </FilterButton>
       <StyledMenu
         id="demo-customized-menu"
         MenuListProps={{

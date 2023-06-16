@@ -10,7 +10,8 @@ export const actionType = {
 	SET_CENTER: 'SET_CENTER',
 	SET_DATASET_IDS: 'SET_DATASET_IDS',
 	ADD_TO_CART: 'ADD_TO_CART',
-	REMOVE_CART_ITEM: 'REMOVE_CART_ITEM'
+	REMOVE_CART_ITEM: 'REMOVE_CART_ITEM',
+	SET_DATA_GOOGLE_EARTH_ENGINE: 'SET_DATA_GOOGLE_EARTH_ENGINE'
 };
 
 const reducer = (state, action) => {
@@ -54,14 +55,18 @@ const reducer = (state, action) => {
 		  }
 	  	case actionType.REMOVE_CART_ITEM: 
 			var newCartItems = state.cartItems
-		  var index = newCartItems.findIndex(e => e.id === action.id)
-		  console.log('index', index,  action.id,newCartItems )
-		  	if (index !== -1)
-			  newCartItems.splice(index, 1)
-		  	localStorage.setItem('cartItems', JSON.stringify(newCartItems))
+			var index = newCartItems.findIndex(e => e.id === action.id)
+			if (index !== -1)
+			newCartItems.splice(index, 1)
+			localStorage.setItem('cartItems', JSON.stringify(newCartItems))
 			return {
 				...state,
 				cartItems: newCartItems
+		  }
+		case actionType.SET_DATA_GOOGLE_EARTH_ENGINE: 
+			return {
+				...state,
+				dataGoogleEarthEngine: action.value
 			}
 		default:
 			return state;

@@ -3,7 +3,8 @@ import { MapContainer, TileLayer, ZoomControl, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { MyPopup, OWMTileLayer, SearchBar } from "../components";
 import GeneralInfo from "../components/GeneralInfo";
-import USGSTileLayer from '../components/USGSTIleLayer';
+import USGSTileLayer from '../components/TileLayer/USGSTIleLayer';
+import GoogleEarthEngine from "../components/TileLayer/GoogleEarthEngineTileLayer";
 import { useStateValue } from '../context/StateProvider';
 
 
@@ -34,6 +35,7 @@ const LeafletMap = () => {
         {/* <MyPopup /> */}
         <OWMTileLayer />
         <USGSTileLayer />
+        <GoogleEarthEngine />
         {/* <GeneralInfo /> */}
         <SetViewOnClick center={center} />
       </MapContainer>

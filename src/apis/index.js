@@ -81,3 +81,25 @@ export const getPositionByLatLon = async ({ lat, lon, radius }) => {
 		return [];
     }
 };
+
+export const renderNavbar = async () => {
+	try {
+		const res = await axios.get(`${SATELLITE_API}/navbar-resolutions/get-navbar`)
+		if (res.status !== 200) return [];
+		return res.data.data;
+	} catch (error) {
+		console.log(err);
+		return [];
+	}
+}
+
+export const getImageGoogleEarthEngine = async ({channelId}) => {
+	try {
+		const res = await axios.get(`${SATELLITE_API}/google-earth-engines/render-from-channel-id?chanelId=${channelId}`)
+		if (res.status !== 200) return [];
+		return res.data.data;
+	} catch (error) {
+		console.log(err);
+		return [];
+	}
+}

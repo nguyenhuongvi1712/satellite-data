@@ -35,3 +35,27 @@
   90% { transform: translate(2px, 2px)   rotate(0deg);  }
   100%{ transform: translate(1px, -2px)  rotate(-1deg); }
 }
+
+#satellite-sidebar {
+  padding: 15px;
+
+  .option-title {
+    margin: 8px 0px 0px;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 0.833rem;
+    letter-spacing: initial;
+    font-weight: 700;
+    color: rgb(119, 124, 133);
+    line-height: 2.66;
+    text-transform: uppercase;
+  }
+
+  .satellite-name {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    letter-spacing: 0em;
+    color: rgb(38, 42, 89);
+  }
+}

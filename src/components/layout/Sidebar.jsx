@@ -6,6 +6,8 @@ import DataSetTab from "../DataTab";
 import ResultTab from "../ResultTab";
 import SearchCriteriaTab from "../SearchCriteriaTab";
 import FilterDropdown from "./FilterDropdown";
+import SearchLocation from "./SearchLocation";
+import SatelliteData from "./SatelliteData";
 
 import "./Sidebar.scss";
 const drawerWidth = 400;
@@ -61,20 +63,21 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
             boxSizing: "border-box",
             overflowY: "inherit",
             overflowX: "hidden",
-            paddingTop: 0.5,
+            paddingTop: 10,
           },
         }}
       >
         <div className="logo d-flex justify-between align-center">
-          <TextField
+          {/* <TextField
             hiddenLabel
             id="filled-hidden-label-small"
             placeholder="Search location ..."
             size="small"
-          />
+          /> */}
+          <SearchLocation />
           <FilterDropdown />
         </div>
-        <div className="logo">
+        {/* <div className="logo">
           <Tabs
             value={currentTab}
             onChange={handleChangeTab}
@@ -96,7 +99,8 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, dataSets, results }) => {
           style={{ overflowY: "auto", overflowX: "hidden" }}
         >
           <ResultTab results={results} />
-        </TabPanel>
+        </TabPanel> */}
+        <SatelliteData />
       </Drawer>
     </Box>
   );
