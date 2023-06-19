@@ -37,8 +37,6 @@ const SearchLocationBar = () => {
         type: actionType.SET_CENTER,
         center: [value.position.lat, value.position.lng],
       });
-        console.log('zoom', zoom)
-        
     }
   };
 
