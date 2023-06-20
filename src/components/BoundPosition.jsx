@@ -52,12 +52,12 @@ const BoundPosition = () => {
             <div className="flex flex-col w-72">
               <h6 className="text-lg font-bold">{}</h6>
               <p className="m-0 text-sm">
-                {" "}
-                {`Latitude: ${boundPosition.position.lat.toFixed(
-                  3
-                )}, Longitude: ${boundPosition.position.lng.toFixed(3)}`}
+                <b>Latitude: </b> {boundPosition.position.lat.toFixed(3)},{" "}
+                <b>Longitude: </b> {boundPosition.position.lng.toFixed(3)}
               </p>
-              <p className="m-0 text-sm">Area: {area.toFixed(3)}km2</p>
+              <p className="m-0 text-sm">
+                <b>Area: </b> {area.toFixed(3)} km2
+              </p>
             </div>
           </Popup>
         </>
