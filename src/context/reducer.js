@@ -57,9 +57,9 @@ const reducer = (state, action) => {
 		  }
 	  	case actionType.REMOVE_CART_ITEM: 
 			var newCartItems = state.cartItems
-			var index = newCartItems.findIndex(e => e.id === action.id)
-			if (index !== -1)
-			newCartItems.splice(index, 1)
+			// var index = newCartItems.findIndex(e => e.id === action.id)
+			// if (index !== -1)
+			newCartItems.splice(action.id, 1)
 			localStorage.setItem('cartItems', JSON.stringify(newCartItems))
 			return {
 				...state,

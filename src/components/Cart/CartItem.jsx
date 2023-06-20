@@ -30,13 +30,13 @@ const CartItems = () => {
         }}
       >
         {cartItems &&
-          cartItems.map((item) => (
-            <Card variant="outlined" className="mb-1" key={item.id}>
+          cartItems.map((item, index) => (
+            <Card variant="outlined" className="mb-1" key={index}>
               <CardContent sx={{ display: "flex", alignItems: "center" }}>
                 <CardMedia
                   component="img"
                   sx={{ width: 151 }}
-                  image={item.imageUrl}
+                  image={item.data.linkSatellite}
                   alt="Live from space album cover"
                 />
                 <Box
@@ -47,21 +47,30 @@ const CartItems = () => {
                     <div>
                       <strong>Latitude/Longitude: </strong>
                       <span>
-                        {item.lat},{item.long}
+                        {item.data.centerLocation.latitude},
+                        {item.data.centerLocation.longitude}
                       </span>
                     </div>
                     <div>
-                      <strong>Vertical: </strong>
-                      <span>{item.vertical}</span>
+                      <strong>Area: </strong>
+                      <span>{item.area} km2</span>
                     </div>
                     <div>
-                      <strong>Horizontal: </strong>
-                      <span>{item.horizontal}</span>
+                      <strong>Resolution: </strong>
+                      <span>{item.channel.resolutions}</span>
+                    </div>
+                    <div>
+                      <strong>Channel : </strong>
+                      <span>{item.channel.nameChannel}</span>
+                    </div>
+                    <div>
+                      <strong>Satellite : </strong>
+                      <span>{item.channel.googleEearthSatellitedata.name}</span>
                     </div>
                   </div>
                   <IconButton
                     aria-label="delete"
-                    onClick={() => handleOnCLick(item.id)}
+                    onClick={() => handleOnCLick(index)}
                   >
                     <DeleteIcon fontSize="inherit" />
                   </IconButton>
@@ -80,7 +89,9 @@ const CartItems = () => {
             style={{ width: "45%" }}
           >
             {" "}
-            <Button variant="outlined" style={{width: '100%'}}>View Cart</Button>
+            <Button variant="outlined" style={{ width: "100%" }}>
+              View Cart
+            </Button>
           </Link>
         </div>
       </Box>

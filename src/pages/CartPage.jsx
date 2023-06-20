@@ -37,42 +37,47 @@ const CartPage = () => {
           Your Cart {cartItems.length > 0 && `(${cartItems.length} items)`}
         </h1>
         {cartItems &&
-          cartItems.map((item) => (
-            <Card variant="outlined" className="mb-1" key={item.id}>
+          cartItems.map((item, index) => (
+            <Card variant="outlined" className="mb-1" key={index}>
               <CardContent sx={{ display: "flex", alignItems: "center" }}>
                 <CardMedia
                   component="img"
                   sx={{ width: 151 }}
-                  image={item.imageUrl}
+                  image={item.data.linkSatellite}
                   alt="Live from space album cover"
                 />
                 <Box
-                  sx={{ marginLeft: 5 }}
+                  sx={{ marginLeft: 1 }}
                   className="d-flex justify-between w-100 align-center"
                 >
                   <div>
                     <div>
-                      <strong>Id: </strong>
-                      <span>{item.idUsgs}</span>
-                    </div>
-                    <div>
                       <strong>Latitude/Longitude: </strong>
                       <span>
-                        {item.lat},{item.long}
+                        {item.data.centerLocation.latitude},
+                        {item.data.centerLocation.longitude}
                       </span>
                     </div>
                     <div>
-                      <strong>Vertical: </strong>
-                      <span>{item.vertical}</span>
+                      <strong>Area: </strong>
+                      <span>{item.area} km2</span>
                     </div>
                     <div>
-                      <strong>Horizontal: </strong>
-                      <span>{item.horizontal}</span>
+                      <strong>Resolution: </strong>
+                      <span>{item.channel.resolutions}</span>
+                    </div>
+                    <div>
+                      <strong>Channel : </strong>
+                      <span>{item.channel.nameChannel}</span>
+                    </div>
+                    <div>
+                      <strong>Satellite : </strong>
+                      <span>{item.channel.googleEearthSatellitedata.name}</span>
                     </div>
                   </div>
                   <IconButton
                     aria-label="delete"
-                    onClick={() => handleOnCLick(item.id)}
+                    onClick={() => handleOnCLick(index)}
                   >
                     <DeleteIcon fontSize="inherit" />
                   </IconButton>
@@ -82,7 +87,8 @@ const CartPage = () => {
           ))}
         <div style={{ textAlign: "right" }}>
           <p className="mb-3">
-            <b>Total:</b> <span style={{fontSize: '1.5em', fontWeight: 800}}>$46.60</span>
+            <b>Total:</b>{" "}
+            <span style={{ fontSize: "1.5em", fontWeight: 800 }}>$46.60</span>
           </p>
           <Button variant="contained">Checkout now</Button>
         </div>
