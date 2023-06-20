@@ -16,7 +16,10 @@ function SetViewOnClick({ center }) {
   return null;
 }
 const LeafletMap = () => {
-  const [{ center, zoom }] = useStateValue();
+  const [{ center, zoom, queryParams }] = useStateValue();
+  // useEffect(() => {
+  //   if()
+  // }, [queryParams])
 
   return (
     <>

@@ -12,5 +12,11 @@ export const initialState = {
 	cartItems: JSON.parse(localStorage.getItem('cartItems')) ?? [],
 	dataGoogleEarthEngine: null,
 	boundPosition: {},
-	zoom: 5
+	zoom: 5,
+	queryParams: {
+		channelId: '',
+		mapView: null,
+		timeStartReq: '',
+		timeEndReq: ''
+	}
 };

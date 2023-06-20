@@ -12,7 +12,8 @@ export const actionType = {
 	ADD_TO_CART: 'ADD_TO_CART',
 	REMOVE_CART_ITEM: 'REMOVE_CART_ITEM',
 	SET_DATA_GOOGLE_EARTH_ENGINE: 'SET_DATA_GOOGLE_EARTH_ENGINE',
-	SET_BOUND_POSITION: 'SET_BOUND_POSITION'
+	SET_BOUND_POSITION: 'SET_BOUND_POSITION',
+	SET_QUERY_PARAMS: 'SET_QUERY_PARAMS'
 };
 
 const reducer = (state, action) => {
@@ -64,20 +65,23 @@ const reducer = (state, action) => {
 				...state,
 				cartItems: newCartItems
 		  }
-	  case actionType.SET_DATA_GOOGLE_EARTH_ENGINE: 
-			return {
-				...state,
-				dataGoogleEarthEngine: action.value
-		  }
-	  case actionType.SET_BOUND_POSITION: 
+		case actionType.SET_DATA_GOOGLE_EARTH_ENGINE: 
 				return {
 					...state,
-					boundPosition: action.value,
-					zoom: action.value.mapView ? 5 : 20
+					dataGoogleEarthEngine: action.value
 			}
-		
-		default:
-			return state;
+		case actionType.SET_BOUND_POSITION: 
+					return {
+						...state,
+						boundPosition: action.value,
+			}
+		case actionType.SET_QUERY_PARAMS: 
+			return {
+				...state,
+				queryParams: action.value
+			}
+			default:
+				return state;
   }
 };
 

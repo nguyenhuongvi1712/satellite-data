@@ -23,6 +23,9 @@ const BoundPosition = () => {
   }, [boundPosition]);
 
   useEffect(() => {
+    if (boundPosition.position) {
+      map.setView([boundPosition.position?.lat, boundPosition.position?.lng]);
+    }
     if (!boundPosition.mapView) return;
     const { south, north, west, east } = boundPosition.mapView;
     const area =
@@ -61,11 +64,6 @@ const BoundPosition = () => {
           </Popup>
         </>
       ) : (
-        // <Circle
-        //   center={renderCenter}
-        //   radius={500}
-        //   pathOptions={{ color: "red" }}
-        // />
         <Marker position={renderCenter} />
       )}
     </>

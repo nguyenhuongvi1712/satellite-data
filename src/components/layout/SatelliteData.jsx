@@ -24,8 +24,9 @@ import { actionType } from "../../context/reducer";
 
 const SatelliteData = () => {
   const [data, setData] = useState([]);
-  const [{ dataGoogleEarthEngine, boundPosition }, dispatch] = useStateValue();
-  const [checked, setChecked] = useState(null)
+  const [{ dataGoogleEarthEngine, boundPosition, queryParams }, dispatch] =
+    useStateValue();
+  const [checked, setChecked] = useState(null);
   useEffect(() => {
     const fetch = async () => {
       const res = await renderNavbar();
@@ -34,21 +35,34 @@ const SatelliteData = () => {
     fetch();
   }, []);
   const handleListItemClick = async (channelId) => {
-    const boundaryData = boundPosition.mapView ? boundPosition.mapView : null
-    const res = await getImageGoogleEarthEngine({ channelId, boundaryData });
+    
+    const res = await getImageGoogleEarthEngine({
+      channelId,
+      boundaryData: queryParams.mapView || null,
+    });
     if (res) {
       dispatch({
-        type: actionType.SET_DATA_GOOGLE_EARTH_ENGINE,
-        value: res,
+        type: actionType.SET_BOUND_POSITION,
+        value: {
+          mapView: res.mapView || {},
+          position: {
+            lat: res.centerLocation.latitude,
+            lng: res.centerLocation.longitude,
+          },
+          linkSatellite: res.linkSatellite,
+        },
       });
-      // dispatch({
-      //   type: actionType.SET_BOUND_POSITION,
-      //   value: {},
-      // });
-      
+
+      dispatch({
+        type: actionType.SET_QUERY_PARAMS,
+        value: {
+          ...queryParams,
+          channelId,
+        },
+      });
     }
-    setChecked(channelId)
-  }
+    setChecked(channelId);
+  };
   return (
     <>
       {data &&

@@ -1,6 +1,6 @@
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
-import { autoSuggest } from "../../apis";
+import { autoSuggest, getImageGoogleEarthEngine } from "../../apis";
 import * as React from "react";
 import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
@@ -12,7 +12,7 @@ const SearchLocationBar = () => {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
-  const [{ boundPosition, zoom }, dispatch] = useStateValue();
+  const [{ boundPosition, queryParams }, dispatch] = useStateValue();
 
   useEffect(() => {
     setLoading(true);
@@ -27,15 +27,39 @@ const SearchLocationBar = () => {
     fetch();
   }, [value]);
 
-  const handleOnSetBoundPosition = (value) => {
+  const handleOnSetBoundPosition = async (value) => {
     if (value) {
+      console.log("queryParams", queryParams);
+      if (queryParams.channelId) {
+        const res = await getImageGoogleEarthEngine({
+          channelId: queryParams.channelId,
+          boundaryData: value.mapView || null,
+        });
+        if (res) {
+          dispatch({
+            type: actionType.SET_BOUND_POSITION,
+            value: {
+              mapView: res.mapView || {},
+              position: {
+                lat: res.centerLocation.latitude,
+                lng: res.centerLocation.longitude,
+              },
+              linkSatellite: res.linkSatellite,
+            },
+          });
+        }
+      } else {
+        dispatch({
+          type: actionType.SET_BOUND_POSITION,
+          value,
+        });
+      }
       dispatch({
-        type: actionType.SET_BOUND_POSITION,
-        value,
-      });
-      dispatch({
-        type: actionType.SET_CENTER,
-        center: [value.position.lat, value.position.lng],
+        type: actionType.SET_QUERY_PARAMS,
+        value: {
+          ...queryParams,
+          mapView: value.mapView || {},
+        },
       });
     }
   };
