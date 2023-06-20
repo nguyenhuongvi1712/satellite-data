@@ -4,14 +4,15 @@ import {
   CardContent,
   CardMedia,
   IconButton,
+  Stack,
   Button,
+  Link,
 } from "@mui/material";
-import { useStateValue } from "../context/StateProvider";
+import { useStateValue } from "../../context/StateProvider";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { actionType } from "../context/reducer";
-import CartItems from "../components/Cart/CartItem";
+import { actionType } from "../../context/reducer";
 
-const CartPage = () => {
+const CartItems = () => {
   const [{ cartItems }, dispatch] = useStateValue();
   const handleOnCLick = (id) => {
     dispatch({
@@ -24,18 +25,10 @@ const CartPage = () => {
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
-          p: 1,
-          paddingTop: 9,
-          margin: "auto 400px",
+          maxWidth: "400px",
+          maxHeight: "50vh",
         }}
       >
-        <h1
-          className="text-center text-bold mb-1"
-          style={{ fontSize: "1.5rem" }}
-        >
-          Your Cart {cartItems.length > 0 && `(${cartItems.length} items)`}
-        </h1>
         {cartItems &&
           cartItems.map((item) => (
             <Card variant="outlined" className="mb-1" key={item.id}>
@@ -47,14 +40,10 @@ const CartPage = () => {
                   alt="Live from space album cover"
                 />
                 <Box
-                  sx={{ marginLeft: 5 }}
+                  sx={{ marginLeft: 1 }}
                   className="d-flex justify-between w-100 align-center"
                 >
                   <div>
-                    <div>
-                      <strong>Id: </strong>
-                      <span>{item.idUsgs}</span>
-                    </div>
                     <div>
                       <strong>Latitude/Longitude: </strong>
                       <span>
@@ -80,14 +69,22 @@ const CartPage = () => {
               </CardContent>
             </Card>
           ))}
-        <div style={{ textAlign: "right" }}>
-          <p className="mb-3">
-            <b>Total:</b> <span style={{fontSize: '1.5em', fontWeight: 800}}>$46.60</span>
-          </p>
-          <Button variant="contained">Checkout now</Button>
+        <div className="d-flex justify-between p-3">
+          <Button variant="contained" style={{ width: "45%" }}>
+            Checkout now
+          </Button>
+          <Link
+            href="/cart"
+            color="inherit"
+            underline="none"
+            style={{ width: "45%" }}
+          >
+            {" "}
+            <Button variant="outlined" style={{width: '100%'}}>View Cart</Button>
+          </Link>
         </div>
       </Box>
     </>
   );
 };
-export default CartPage;
+export default CartItems;

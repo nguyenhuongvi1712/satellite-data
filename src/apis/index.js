@@ -93,10 +93,24 @@ export const renderNavbar = async () => {
 	}
 }
 
-export const getImageGoogleEarthEngine = async ({channelId}) => {
+export const getImageGoogleEarthEngine = async ({channelId, boundaryData,timeStartReq,timeEndReq }) => {
 	try {
-		const res = await axios.get(`${SATELLITE_API}/google-earth-engines/render-from-channel-id?chanelId=${channelId}`)
-		if (res.status !== 200) return [];
+		var url = `${SATELLITE_API}/google-earth-engines/render-from-channel-id?`
+		if (channelId) {
+			url += `chanelId=${channelId}&`
+		}
+		if (boundaryData) {
+			const { south, north, west, east } = boundaryData;
+			url +=`boundaryData=${east},${north},${south},${west}&`
+		}
+		if (timeStartReq) {
+			url +=`timeStartReq=${timeStartReq}&`
+		}
+		if (timeEndReq) {
+			url += `timeEndReq=${timeEndReq}&`
+		}
+		const res = await axios.get(url)
+		if (res.status !== 200) return {};
 		return res.data.data;
 	} catch (error) {
 		console.log(error);

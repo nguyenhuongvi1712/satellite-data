@@ -24,7 +24,7 @@ import { actionType } from "../../context/reducer";
 
 const SatelliteData = () => {
   const [data, setData] = useState([]);
-  const [{ dataGoogleEarthEngine }, dispatch] = useStateValue();
+  const [{ dataGoogleEarthEngine, boundPosition }, dispatch] = useStateValue();
   const [checked, setChecked] = useState(null)
   useEffect(() => {
     const fetch = async () => {
@@ -34,12 +34,18 @@ const SatelliteData = () => {
     fetch();
   }, []);
   const handleListItemClick = async (channelId) => {
-    const res = await getImageGoogleEarthEngine({ channelId })
+    const boundaryData = boundPosition.mapView ? boundPosition.mapView : null
+    const res = await getImageGoogleEarthEngine({ channelId, boundaryData });
     if (res) {
       dispatch({
-        type: actionType.dataGoogleEarthEngine,
+        type: actionType.SET_DATA_GOOGLE_EARTH_ENGINE,
         value: res,
       });
+      // dispatch({
+      //   type: actionType.SET_BOUND_POSITION,
+      //   value: {},
+      // });
+      
     }
     setChecked(channelId)
   }

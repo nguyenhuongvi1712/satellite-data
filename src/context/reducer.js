@@ -64,7 +64,7 @@ const reducer = (state, action) => {
 				...state,
 				cartItems: newCartItems
 		  }
-		case actionType.SET_DATA_GOOGLE_EARTH_ENGINE: 
+	  case actionType.SET_DATA_GOOGLE_EARTH_ENGINE: 
 			return {
 				...state,
 				dataGoogleEarthEngine: action.value

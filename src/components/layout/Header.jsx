@@ -9,11 +9,15 @@ import {
   Badge,
   Avatar,
   Link,
+  Tooltip,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStateValue } from "../../context/StateProvider";
 import { styled } from "@mui/material/styles";
 import { useEffect, useState } from "react";
+import CartItems from "../Cart/CartItem";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -33,6 +37,14 @@ const Header = () => {
   useEffect(() => {
     animate();
   }, [cartItems.length]);
+  const [anchorElCart, setAnchorElCart] = useState(null);
+  const handleOpenCartMenu = (event) => {
+    setAnchorElCart(event.currentTarget);
+  };
+
+  const handleCloseCartMenu = () => {
+    setAnchorElCart(null);
+  };
   return (
     <>
       <AppBar
@@ -43,16 +55,49 @@ const Header = () => {
           <div className="d-flex justify-between w-100 align-center">
             <Logo />
             <div className="d-flex justify-between align-center">
-              <StyledBadge badgeContent={cartItems.length} htmlColor="#ffffff">
-                <Link href="/cart" color="inherit" underline="none">
-                  <IconButton
-                    aria-label="cart"
-                    className={shake ? `shake` : null}
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <StyledBadge
+                    badgeContent={cartItems.length}
+                    htmlColor="#ffffff"
                   >
-                    <ShoppingCartIcon fontSize="inherit" htmlColor="#ffffff" />
-                  </IconButton>
-                </Link>
-              </StyledBadge>
+                    <IconButton
+                      onClick={handleOpenCartMenu}
+                      aria-label="cart"
+                      className={shake ? `shake` : null}
+                    >
+                      <ShoppingCartIcon
+                        fontSize="inherit"
+                        htmlColor="#ffffff"
+                      />
+                    </IconButton>
+                  </StyledBadge>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElCart}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElCart)}
+                  onClose={handleCloseCartMenu}
+                >
+                  {/* {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))} */}
+                  <CartItems/>
+                </Menu>
+              </Box>
+
               <Avatar
                 className="ml-1"
                 alt="Remy Sharp"

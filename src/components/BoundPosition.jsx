@@ -1,8 +1,7 @@
-import { Rectangle, Circle, Marker, useMap } from "react-leaflet";
+import { Rectangle, Circle, Marker, useMap, Popup } from "react-leaflet";
 import { useStateValue } from "../context/StateProvider";
 import { useEffect, useMemo, useState } from "react";
 import { computeArea } from "spherical-geometry-js";
-import { Popup } from "react-leaflet";
 import { actionType } from "../context/reducer";
 
 const BoundPosition = () => {
