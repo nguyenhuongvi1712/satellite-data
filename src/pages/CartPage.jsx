@@ -10,15 +10,27 @@ import { useStateValue } from "../context/StateProvider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { actionType } from "../context/reducer";
 import CartItems from "../components/Cart/CartItem";
+import { useMemo } from "react";
+import { OtherHouses } from "@mui/icons-material";
+import CheckoutModal from "../components/Cart/CheckoutModal";
+import { useState } from "react";
 
 const CartPage = () => {
   const [{ cartItems }, dispatch] = useStateValue();
+  const [open, setOpen] = useState(false);
   const handleOnCLick = (id) => {
     dispatch({
       type: actionType.REMOVE_CART_ITEM,
       id,
     });
   };
+  const subTotal = useMemo(() => {
+    return (
+      cartItems.reduce((sum, item) => {
+        return sum + item.area;
+      }, 0) * 0.01
+    );
+  }, [cartItems]);
   return (
     <>
       <Box
@@ -40,12 +52,12 @@ const CartPage = () => {
           cartItems.map((item, index) => (
             <Card variant="outlined" className="mb-1" key={index}>
               <CardContent sx={{ display: "flex", alignItems: "center" }}>
-                <CardMedia
+                {/* <CardMedia
                   component="img"
                   sx={{ width: 151 }}
                   image={item.data.linkSatellite}
                   alt="Live from space album cover"
-                />
+                /> */}
                 <Box
                   sx={{ marginLeft: 1 }}
                   className="d-flex justify-between w-100 align-center"
@@ -85,13 +97,25 @@ const CartPage = () => {
               </CardContent>
             </Card>
           ))}
-        <div style={{ textAlign: "right" }}>
-          <p className="mb-3">
-            <b>Total:</b>{" "}
-            <span style={{ fontSize: "1.5em", fontWeight: 800 }}>$46.60</span>
-          </p>
-          <Button variant="contained">Checkout now</Button>
-        </div>
+        {cartItems.length > 0 ? (
+          <div style={{ textAlign: "right" }}>
+            <p className="mb-3">
+              <b>Total:</b>{" "}
+              <span style={{ fontSize: "1.5em", fontWeight: 800 }}>
+                ${subTotal?.toFixed(2)}
+              </span>
+            </p>
+            <Button variant="contained" onClick={() => setOpen(true)}>
+              Checkout now
+            </Button>
+          </div>
+        ) : (
+          <>
+            <p className="text-center" style={{fontSize: '1.5em'}}>Your cart is empty</p>
+          </>
+        )}
+
+        <CheckoutModal open={open} handleClose={() => setOpen(false)} />
       </Box>
     </>
   );

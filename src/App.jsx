@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 // components
 import Header from "./components/layout/Header"
 import CartPage from "./pages/CartPage"
-
 import MapPage from "./pages/MapPage"
 function App() {
   return (

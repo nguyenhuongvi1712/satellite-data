@@ -75,6 +75,7 @@ const SearchLocationBar = () => {
       getOptionLabel={(option) => option.title}
       options={options}
       loading={loading}
+      disableClearable
       onClose={() => setOptions([])}
       renderInput={(params) => (
         <TextField

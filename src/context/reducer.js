@@ -13,7 +13,8 @@ export const actionType = {
 	REMOVE_CART_ITEM: 'REMOVE_CART_ITEM',
 	SET_DATA_GOOGLE_EARTH_ENGINE: 'SET_DATA_GOOGLE_EARTH_ENGINE',
 	SET_BOUND_POSITION: 'SET_BOUND_POSITION',
-	SET_QUERY_PARAMS: 'SET_QUERY_PARAMS'
+	SET_QUERY_PARAMS: 'SET_QUERY_PARAMS',
+	RESET_CART: 'RESET_CART'
 };
 
 const reducer = (state, action) => {
@@ -64,6 +65,12 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				cartItems: newCartItems
+		  }
+	  case actionType.RESET_CART:
+		  localStorage.removeItem('cartItems')
+		  return {
+			  state,
+			  cartItems: []
 		  }
 		case actionType.SET_DATA_GOOGLE_EARTH_ENGINE: 
 				return {

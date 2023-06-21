@@ -33,12 +33,12 @@ const CartItems = () => {
           cartItems.map((item, index) => (
             <Card variant="outlined" className="mb-1" key={index}>
               <CardContent sx={{ display: "flex", alignItems: "center" }}>
-                <CardMedia
+                {/* <CardMedia
                   component="img"
                   sx={{ width: 151 }}
                   image={item.data.linkSatellite}
                   alt="Live from space album cover"
-                />
+                /> */}
                 <Box
                   sx={{ marginLeft: 1 }}
                   className="d-flex justify-between w-100 align-center"
