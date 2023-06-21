@@ -166,6 +166,10 @@ const SatelliteData = () => {
                                               {channel.resolutions}m
                                             </p>
                                             <p>
+                                              <b>Wavelength: </b>
+                                              {channel.wavelength}
+                                            </p>
+                                            <p>
                                               <b>Time start: </b>
                                               {
                                                 channel
