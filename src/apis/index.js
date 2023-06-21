@@ -53,7 +53,7 @@ export const getDataSets = async () => {
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
-		console.log(err);
+		console.log(error);
 		return [];
 	}
 };
@@ -64,7 +64,7 @@ export const getResults = async () => {
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
-		console.log(err);
+		console.log(error);
 		return [];
 	}
 };
@@ -77,7 +77,54 @@ export const getPositionByLatLon = async ({ lat, lon, radius }) => {
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
-        console.log(err);
+        console.log(error);
 		return [];
     }
 };
+
+export const renderNavbar = async () => {
+	try {
+		const res = await axios.get(`${SATELLITE_API}/navbar-resolutions/get-navbar`)
+		if (res.status !== 200) return [];
+		return res.data.data;
+	} catch (error) {
+		console.log(error);
+		return [];
+	}
+}
+
+export const getImageGoogleEarthEngine = async ({channelId, boundaryData,timeStartReq,timeEndReq }) => {
+	try {
+		var url = `${SATELLITE_API}/google-earth-engines/render-from-channel-id?`
+		if (channelId) {
+			url += `chanelId=${channelId}&`
+		}
+		if (boundaryData) {
+			const { south, north, west, east } = boundaryData;
+			url +=`boundaryData=${east},${north},${south},${west}&`
+		}
+		if (timeStartReq) {
+			url +=`timeStartReq=${timeStartReq}&`
+		}
+		if (timeEndReq) {
+			url += `timeEndReq=${timeEndReq}&`
+		}
+		const res = await axios.get(url)
+		if (res.status !== 200) return {};
+		return res.data.data;
+	} catch (error) {
+		console.log(error);
+		return [];
+	}
+}
+
+export const autoSuggest = async ({keyword}) => {
+	try {
+		const apiKey = "FKQbWs-wrePG3l2YwMYSSbLqDjBesyQkSZSYg8iUmmk"
+		const res = await axios.get(`https://autosuggest.search.hereapi.com/v1/autosuggest?at=0,0&q=${keyword}&apiKey=${apiKey}`)
+		return res.data
+	} catch (error) {
+		console.log(error)
+		return []
+	}
+}

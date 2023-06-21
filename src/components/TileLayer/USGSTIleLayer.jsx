@@ -1,5 +1,5 @@
 import { TileLayer } from "react-leaflet";
-import { useStateValue } from "../context/StateProvider";
+import { useStateValue } from "../../context/StateProvider";
 
 const USGSTileLayer = () => {
   const [{ usgsData }] = useStateValue();

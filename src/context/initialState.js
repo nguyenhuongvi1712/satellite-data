@@ -9,4 +9,14 @@ export const initialState = {
 	usgsData: [],
 	dataSetIds: [],
 	center: [53.36254, -172.06214],
+	cartItems: JSON.parse(localStorage.getItem('cartItems')) ?? [],
+	dataGoogleEarthEngine: null,
+	boundPosition: {},
+	zoom: 5,
+	queryParams: {
+		channelId: '',
+		mapView: null,
+		timeStartReq: '',
+		timeEndReq: ''
+	}
 };

@@ -1,6 +1,6 @@
 import { TileLayer } from "react-leaflet";
-import { useStateValue } from "../context/StateProvider";
-import { OWM_API_KEY } from "../apis";
+import { useStateValue } from "../../context/StateProvider";
+import { OWM_API_KEY } from "../../apis";
 
 const OWMTileLayer = () => {
   const [{ mapMode }] = useStateValue();

@@ -1,11 +1,16 @@
 const style = {
     fontSize: '1.5rem',
     fontWeight: 800,
-    color: "#478DF0"
+    color: "#ffffff"
 }
+import Link from "@mui/material/Link";
 const Logo = () => {
-    return <>
-        <p style={style}>Satellite Data</p>
-    </>
+    return (
+      <>
+        <Link href="/" style={style} color="inherit" underline="none">
+          Satellite Data
+        </Link>
+      </>
+    );
 }
 export default Logo

@@ -3,8 +3,10 @@ import { MapContainer, TileLayer, ZoomControl, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { MyPopup, OWMTileLayer, SearchBar } from "../components";
 import GeneralInfo from "../components/GeneralInfo";
-import USGSTileLayer from '../components/USGSTIleLayer';
+import USGSTileLayer from '../components/TileLayer/USGSTIleLayer';
+import GoogleEarthEngine from "../components/TileLayer/GoogleEarthEngineTileLayer";
 import { useStateValue } from '../context/StateProvider';
+import BoundPosition from "../components/BoundPosition";
 
 
 function SetViewOnClick({ center }) {
@@ -14,14 +16,16 @@ function SetViewOnClick({ center }) {
   return null;
 }
 const LeafletMap = () => {
-  const [{ center }] = useStateValue();
+  const [{ center, zoom, queryParams }] = useStateValue();
+  // useEffect(() => {
+  //   if()
+  // }, [queryParams])
 
   return (
     <>
       <MapContainer
         center={center}
-        zoom={5}
-        zoomControl={false}
+        zoom={zoom}
         className="h-full w-full relative"
         style={{ zIndex: 0 }}
       >
@@ -34,6 +38,8 @@ const LeafletMap = () => {
         {/* <MyPopup /> */}
         <OWMTileLayer />
         <USGSTileLayer />
+        <GoogleEarthEngine />
+        <BoundPosition />
         {/* <GeneralInfo /> */}
         <SetViewOnClick center={center} />
       </MapContainer>

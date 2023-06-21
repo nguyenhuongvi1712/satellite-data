@@ -9,7 +9,21 @@ const datasets_sample = [
     },
     {
         name: 'CEOS Legacy',
-        id: 'cat_1251'
+        id: 'cat_1251',
+        childrenDatasets: [
+            {
+                name: 'Aerial Imagery',
+                id: 'cat_41'
+            },
+            {
+                name: 'AVHRR',
+                id: 'cat_205'
+            },
+            {
+                name: 'CEOS Legacy',
+                id: 'cat_1251'
+            },
+        ]
     },
     {
         name: 'Commercial Satellites',
@@ -29,7 +43,21 @@ const datasets_sample = [
     },
     {
         name: 'Digital Maps',
-        id: 'cat_208'
+        id: 'cat_208',
+        childrenDatasets: [
+            {
+                name: 'Aerial Imagery',
+                id: 'cat_41'
+            },
+            {
+                name: 'AVHRR',
+                id: 'cat_205'
+            },
+            {
+                name: 'CEOS Legacy',
+                id: 'cat_1251'
+            },
+        ]
     },
     {
         name: 'EO-1',
@@ -53,7 +81,21 @@ const datasets_sample = [
     },
     {
         name: 'Landsat',
-        id: 'cat_210'
+        id: 'cat_210',
+        childrenDatasets: [
+            {
+                name: 'Aerial Imagery',
+                id: 'cat_41'
+            },
+            {
+                name: 'AVHRR',
+                id: 'cat_205'
+            },
+            {
+                name: 'CEOS Legacy',
+                id: 'cat_1251'
+            },
+        ]
     },
     {
         name: 'LCMAP',
