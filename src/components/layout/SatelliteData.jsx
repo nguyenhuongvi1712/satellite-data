@@ -114,7 +114,7 @@ const SatelliteData = () => {
                   <ListItem
                     key={satellite.id}
                     disablePadding
-                    sx={{ display: "block" }}
+                    sx={{ display: "block", marginBottom: '10px' }}
                   >
                     <Accordion>
                       <AccordionSummary
@@ -135,6 +135,7 @@ const SatelliteData = () => {
                                   component="div"
                                   disablePadding
                                   key={channel.id}
+                                  sx={{marginBottom: '5px'}}
                                 >
                                   <Accordion
                                     expanded={expanded === channel.id}

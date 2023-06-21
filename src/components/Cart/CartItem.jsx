@@ -79,17 +79,17 @@ const CartItems = () => {
             </Card>
           ))}
         <div className="d-flex justify-between p-3">
-          <Button variant="contained" style={{ width: "45%" }}>
+          {/* <Button variant="contained" style={{ width: "45%" }}>
             Checkout now
-          </Button>
+          </Button> */}
           <Link
             href="/cart"
             color="inherit"
             underline="none"
-            style={{ width: "45%" }}
+            style={{ width: "100%" }}
           >
             {" "}
-            <Button variant="outlined" style={{ width: "100%" }}>
+            <Button variant="contained" style={{ width: "100%" }}>
               View Cart
             </Button>
           </Link>
