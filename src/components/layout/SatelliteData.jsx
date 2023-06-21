@@ -107,7 +107,7 @@ const SatelliteData = () => {
         data.map((e) => (
           <div id="satellite-sidebar">
             <Divider />
-            <p className="option-title">{e.textRender}</p>
+            <p className="option-title">{e.textRender}{' '}({e.rangePixelSize} m)</p>
             <List>
               {e.googleearthSatelliteData &&
                 e.googleearthSatelliteData.map((satellite, index) => (
@@ -163,7 +163,7 @@ const SatelliteData = () => {
                                           <div>
                                             <p>
                                               <b>Resolution: </b>
-                                              {channel.resolutions}
+                                              {channel.resolutions}m
                                             </p>
                                             <p>
                                               <b>Time start: </b>
