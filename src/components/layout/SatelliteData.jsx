@@ -107,14 +107,14 @@ const SatelliteData = () => {
         data.map((e) => (
           <div id="satellite-sidebar">
             <Divider />
-            <p className="option-title">{e.textRender}</p>
+            <p className="option-title">{e.textRender}{' '}({e.rangePixelSize} m)</p>
             <List>
               {e.googleearthSatelliteData &&
                 e.googleearthSatelliteData.map((satellite, index) => (
                   <ListItem
                     key={satellite.id}
                     disablePadding
-                    sx={{ display: "block" }}
+                    sx={{ display: "block", marginBottom: '10px' }}
                   >
                     <Accordion>
                       <AccordionSummary
@@ -135,6 +135,7 @@ const SatelliteData = () => {
                                   component="div"
                                   disablePadding
                                   key={channel.id}
+                                  sx={{marginBottom: '5px'}}
                                 >
                                   <Accordion
                                     expanded={expanded === channel.id}
@@ -162,7 +163,7 @@ const SatelliteData = () => {
                                           <div>
                                             <p>
                                               <b>Resolution: </b>
-                                              {channel.resolutions}
+                                              {channel.resolutions}m
                                             </p>
                                             <p>
                                               <b>Time start: </b>

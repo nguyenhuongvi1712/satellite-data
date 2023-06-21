@@ -28,6 +28,7 @@ const LeafletMap = () => {
         zoom={zoom}
         className="h-full w-full relative"
         style={{ zIndex: 0 }}
+        zoomControl={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
