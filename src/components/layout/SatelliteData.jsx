@@ -20,6 +20,7 @@ import {
   ListItemIcon,
   IconButton,
   CircularProgress,
+  Switch,
 } from "@mui/material";
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
@@ -34,7 +35,26 @@ const SatelliteData = () => {
   useEffect(() => {
     const fetch = async () => {
       const res = await renderNavbar();
-      setData(res);
+      setData(
+        res.map((e) => {
+          return {
+            ...e,
+            googleearthSatelliteData: e.googleearthSatelliteData.map((item) => {
+              return {
+                ...item,
+                googleearthSatelliteDatasets:
+                  item.googleearthSatelliteDatasets.map((channel) => {
+                    return {
+                      ...channel,
+                      enableHyperResolution: false,
+                    };
+                  }),
+              };
+            }),
+          };
+        })
+      );
+      console.log("res", data);
     };
     fetch();
   }, []);
@@ -44,7 +64,7 @@ const SatelliteData = () => {
     setExpanded(isExpanded ? panel : false);
   };
   const handleAddToCart = async (channel) => {
-    setLoading(true)
+    setLoading(true);
     const res = await getImageGoogleEarthEngine({
       channelId: channel.id,
       boundaryData: queryParams.mapView || null,
@@ -60,23 +80,24 @@ const SatelliteData = () => {
         ]) / 1000000;
       const cartItem = {
         data: {
-          ...res
+          ...res,
         },
         area,
-        channel
-      }
+        channel,
+      };
       dispatch({
         type: actionType.ADD_TO_CART,
         item: cartItem,
       });
-      console.log('cartItem', cartItem)
-      setLoading(false)
+      console.log("cartItem", cartItem);
+      setLoading(false);
     }
   };
-  const handleListItemClick = async (channelId) => {
+  const handleListItemClick = async (channelId, enableHyperResolution) => {
     const res = await getImageGoogleEarthEngine({
       channelId,
       boundaryData: queryParams.mapView || null,
+      enableHyperResolution
     });
     if (res) {
       dispatch({
@@ -96,21 +117,35 @@ const SatelliteData = () => {
         value: {
           ...queryParams,
           channelId,
+          enableHyperResolution,
         },
       });
     }
     setChecked(channelId);
   };
+  const handleOnUseHyperResolution = (
+    resolutionIdx,
+    satelliteIdx,
+    channelIdx,
+    e
+  ) => {
+    const newData = [...data]
+    newData[resolutionIdx].googleearthSatelliteData[
+      satelliteIdx
+    ].googleearthSatelliteDatasets[channelIdx].enableHyperResolution =
+      e.target.checked;
+    setData(newData)
+  };
   return (
     <>
       {data &&
-        data.map((e) => (
+        data.map((e, resolutionIdx) => (
           <div id="satellite-sidebar">
             <Divider />
             <p className="option-title">{e.textRender}{' '}({e.rangePixelSize} m)</p>
             <List>
               {e.googleearthSatelliteData &&
-                e.googleearthSatelliteData.map((satellite, index) => (
+                e.googleearthSatelliteData.map((satellite, satelliteIdx) => (
                   <ListItem
                     key={satellite.id}
                     disablePadding
@@ -130,7 +165,7 @@ const SatelliteData = () => {
                         {satellite.googleearthSatelliteDatasets ? (
                           <div>
                             {satellite.googleearthSatelliteDatasets.map(
-                              (channel) => (
+                              (channel, channelIdx) => (
                                 <List
                                   component="div"
                                   disablePadding
@@ -159,6 +194,32 @@ const SatelliteData = () => {
                                           padding: "0px 16px 0px 32px",
                                         }}
                                       >
+                                        <FormControlLabel
+                                          control={
+                                            <Switch
+                                              checked={
+                                                channel.enableHyperResolution
+                                              }
+                                              onChange={(e) =>
+                                                handleOnUseHyperResolution(
+                                                  resolutionIdx,
+                                                  satelliteIdx,
+                                                  channelIdx,
+                                                  e
+                                                )
+                                              }
+                                            />
+                                          }
+                                          label="Enable hyper-resolution"
+                                          labelPlacement="start"
+                                          sx={{
+                                            margin: 0,
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            marginBottom: "0.75em",
+                                          }}
+                                        />
+                                        <Divider />
                                         <div className="d-flex justify-between align-center mb-3">
                                           <div>
                                             <p>
@@ -188,7 +249,7 @@ const SatelliteData = () => {
                                           </div>
                                           <IconButton
                                             onClick={() =>
-                                              handleListItemClick(channel.id)
+                                              handleListItemClick(channel.id, channel.enableHyperResolution)
                                             }
                                           >
                                             <SatelliteIcon />
@@ -204,7 +265,14 @@ const SatelliteData = () => {
                                             queryParams.mapView === null
                                           }
                                         >
-                                          {loading ?  <CircularProgress size={20} color="inherit" /> : 'Add to cart'}
+                                          {loading ? (
+                                            <CircularProgress
+                                              size={20}
+                                              color="inherit"
+                                            />
+                                          ) : (
+                                            "Add to cart"
+                                          )}
                                         </Button>
                                       </div>
                                     </AccordionDetails>

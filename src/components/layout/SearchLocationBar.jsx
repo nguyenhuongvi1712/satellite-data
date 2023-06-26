@@ -33,6 +33,7 @@ const SearchLocationBar = () => {
       if (queryParams.channelId) {
         const res = await getImageGoogleEarthEngine({
           channelId: queryParams.channelId,
+          enableHyperResolution: queryParams.enableHyperResolution,
           boundaryData: value.mapView || null,
         });
         if (res) {
