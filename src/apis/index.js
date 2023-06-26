@@ -93,7 +93,7 @@ export const renderNavbar = async () => {
 	}
 }
 
-export const getImageGoogleEarthEngine = async ({channelId, boundaryData,timeStartReq,timeEndReq }) => {
+export const getImageGoogleEarthEngine = async ({channelId, boundaryData,timeStartReq,timeEndReq, enableHyperResolution }) => {
 	try {
 		var url = `${SATELLITE_API}/google-earth-engines/render-from-channel-id?`
 		if (channelId) {
@@ -108,6 +108,9 @@ export const getImageGoogleEarthEngine = async ({channelId, boundaryData,timeSta
 		}
 		if (timeEndReq) {
 			url += `timeEndReq=${timeEndReq}&`
+		}
+		if (enableHyperResolution) {
+			url += `isVisualizeImage=${enableHyperResolution}&`
 		}
 		const res = await axios.get(url)
 		if (res.status !== 200) return {};

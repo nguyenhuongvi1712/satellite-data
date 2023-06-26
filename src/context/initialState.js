@@ -17,6 +17,7 @@ export const initialState = {
 		channelId: '',
 		mapView: null,
 		timeStartReq: '',
-		timeEndReq: ''
+		timeEndReq: '',
+		enableHyperResolution: false
 	}
 };
