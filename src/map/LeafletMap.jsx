@@ -140,7 +140,7 @@ const LeafletMap = () =>
                             circle: false,
                             circlemarker: false,
                             marker: false,
-                            polygon: mapLayers.length > 0 ? false : true
+                            polygon: mapLayers.length > 0 || queryParams.channelId == '' ? false : true
                         } }
                     />
                 </FeatureGroup>
