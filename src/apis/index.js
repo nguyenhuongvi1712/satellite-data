@@ -77,57 +77,76 @@ export const getPositionByLatLon = async ({ lat, lon, radius }) => {
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
-        console.log(error);
+		console.log(error);
 		return [];
-    }
+	}
 };
 
 export const renderNavbar = async () => {
 	try {
-		const res = await axios.get(`${SATELLITE_API}/navbar-resolutions/get-navbar`)
+		const res = await axios.get(
+			`${SATELLITE_API}/navbar-resolutions/get-navbar`,
+		);
 		if (res.status !== 200) return [];
 		return res.data.data;
 	} catch (error) {
 		console.log(error);
 		return [];
 	}
-}
+};
 
-export const getImageGoogleEarthEngine = async ({channelId, boundaryData,timeStartReq,timeEndReq, enableHyperResolution }) => {
+export const getImageGoogleEarthEngine = async ({
+	channelId,
+	boundaryData,
+	timeStartReq,
+	timeEndReq,
+	enableHyperResolution,
+	modeRender,
+	polygon,
+}) => {
 	try {
-		var url = `${SATELLITE_API}/google-earth-engines/render-from-channel-id?`
+		var url = `${SATELLITE_API}/google-earth-engines/render-from-channel-id?`;
+		var modeRender = 'RADIUS';
 		if (channelId) {
-			url += `chanelId=${channelId}&`
+			url += `chanelId=${channelId}&`;
 		}
 		if (boundaryData) {
 			const { south, north, west, east } = boundaryData;
-			url +=`boundaryData=${east},${north},${south},${west}&`
+			url += `boundaryData=${east},${north},${south},${west}&`;
 		}
 		if (timeStartReq) {
-			url +=`timeStartReq=${timeStartReq}&`
+			url += `timeStartReq=${timeStartReq}&`;
 		}
 		if (timeEndReq) {
-			url += `timeEndReq=${timeEndReq}&`
+			url += `timeEndReq=${timeEndReq}&`;
 		}
 		if (enableHyperResolution) {
-			url += `isVisualizeImage=${enableHyperResolution}&`
+			url += `isVisualizeImage=${enableHyperResolution}&`;
 		}
-		const res = await axios.get(url)
+
+		if (polygon && polygon.length > 0) {
+			url += `polygon=${polygon}&`;
+            modeRender = 'POLYGON'
+		}
+        url += `modeRender=${modeRender}`
+		const res = await axios.get(url);
 		if (res.status !== 200) return {};
 		return res.data.data;
 	} catch (error) {
 		console.log(error);
 		return [];
 	}
-}
+};
 
-export const autoSuggest = async ({keyword}) => {
+export const autoSuggest = async ({ keyword }) => {
 	try {
-		const apiKey = "FKQbWs-wrePG3l2YwMYSSbLqDjBesyQkSZSYg8iUmmk"
-		const res = await axios.get(`https://autosuggest.search.hereapi.com/v1/autosuggest?at=0,0&q=${keyword}&apiKey=${apiKey}`)
-		return res.data
+		const apiKey = 'FKQbWs-wrePG3l2YwMYSSbLqDjBesyQkSZSYg8iUmmk';
+		const res = await axios.get(
+			`https://autosuggest.search.hereapi.com/v1/autosuggest?at=0,0&q=${keyword}&apiKey=${apiKey}`,
+		);
+		return res.data;
 	} catch (error) {
-		console.log(error)
-		return []
+		console.log(error);
+		return [];
 	}
-}
+};

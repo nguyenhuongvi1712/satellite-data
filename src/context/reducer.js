@@ -14,7 +14,7 @@ export const actionType = {
 	SET_DATA_GOOGLE_EARTH_ENGINE: 'SET_DATA_GOOGLE_EARTH_ENGINE',
 	SET_BOUND_POSITION: 'SET_BOUND_POSITION',
 	SET_QUERY_PARAMS: 'SET_QUERY_PARAMS',
-	RESET_CART: 'RESET_CART'
+	RESET_CART: 'RESET_CART',
 };
 
 const reducer = (state, action) => {
@@ -42,53 +42,53 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				center: action.center,
-		  };
+			};
 		case actionType.SET_DATASET_IDS:
-		  return {
-			  ...state,
-			  dataSetIds: action.dataSetIds
-		  }
-		case actionType.ADD_TO_CART: 
-			var newCartItems = state.cartItems
-			newCartItems.push(action.item)
-			localStorage.setItem('cartItems', JSON.stringify(newCartItems))
 			return {
 				...state,
-				cartItems: newCartItems
-		  }
-	  	case actionType.REMOVE_CART_ITEM: 
-			var newCartItems = state.cartItems
+				dataSetIds: action.dataSetIds,
+			};
+		case actionType.ADD_TO_CART:
+			var newCartItems = state.cartItems;
+			newCartItems.push(action.item);
+			localStorage.setItem('cartItems', JSON.stringify(newCartItems));
+			return {
+				...state,
+				cartItems: newCartItems,
+			};
+		case actionType.REMOVE_CART_ITEM:
+			var newCartItems = state.cartItems;
 			// var index = newCartItems.findIndex(e => e.id === action.id)
 			// if (index !== -1)
-			newCartItems.splice(action.id, 1)
-			localStorage.setItem('cartItems', JSON.stringify(newCartItems))
+			newCartItems.splice(action.id, 1);
+			localStorage.setItem('cartItems', JSON.stringify(newCartItems));
 			return {
 				...state,
-				cartItems: newCartItems
-		  }
-	  case actionType.RESET_CART:
-		  localStorage.removeItem('cartItems')
-		  return {
-			  state,
-			  cartItems: []
-		  }
-		case actionType.SET_DATA_GOOGLE_EARTH_ENGINE: 
-				return {
-					...state,
-					dataGoogleEarthEngine: action.value
-			}
-		case actionType.SET_BOUND_POSITION: 
-					return {
-						...state,
-						boundPosition: action.value,
-			}
-		case actionType.SET_QUERY_PARAMS: 
+				cartItems: newCartItems,
+			};
+		case actionType.RESET_CART:
+			localStorage.removeItem('cartItems');
+			return {
+				state,
+				cartItems: [],
+			};
+		case actionType.SET_DATA_GOOGLE_EARTH_ENGINE:
 			return {
 				...state,
-				queryParams: action.value
-			}
-			default:
-				return state;
+				dataGoogleEarthEngine: action.value,
+			};
+		case actionType.SET_BOUND_POSITION:
+			return {
+				...state,
+				boundPosition: action.value,
+			};
+		case actionType.SET_QUERY_PARAMS:
+			return {
+				...state,
+				queryParams: action.value,
+			};
+		default:
+			return state;
   }
 };
 

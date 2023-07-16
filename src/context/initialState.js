@@ -18,6 +18,7 @@ export const initialState = {
 		mapView: null,
 		timeStartReq: '',
 		timeEndReq: '',
-		enableHyperResolution: false
+		enableHyperResolution: false,
+        polygon: []
 	}
 };

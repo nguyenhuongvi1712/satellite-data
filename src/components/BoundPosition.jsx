@@ -68,6 +68,7 @@ const BoundPosition = () => {
       )}
     </>
   ) : null;
+return <></>
 };
 
 export default BoundPosition;
