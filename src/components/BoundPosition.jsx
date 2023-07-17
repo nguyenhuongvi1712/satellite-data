@@ -48,7 +48,7 @@ const BoundPosition = () => {
     <>
       {boundPosition.mapView ? (
         <>
-          <RectangluseEffecte bounds={renderMapView} pathOptions={{ color: "red" }} />
+          <Rectangle bounds={renderMapView} pathOptions={{ color: "red" }} />
           <Popup
             position={[boundPosition.position.lat, boundPosition.position.lng]}
           >

@@ -56,7 +56,7 @@ const Header = () => {
             <Logo />
             <div className="d-flex justify-between align-center">
               <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
+                {/* <Tooltip title="Open settings">
                   <StyledBadge
                     badgeContent={cartItems.length}
                     htmlColor="#ffffff"
@@ -72,7 +72,7 @@ const Header = () => {
                       />
                     </IconButton>
                   </StyledBadge>
-                </Tooltip>
+                </Tooltip> */}
                 <Menu
                   sx={{ mt: "45px" }}
                   id="menu-appbar"

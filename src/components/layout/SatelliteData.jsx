@@ -89,7 +89,6 @@ const SatelliteData = () => {
         type: actionType.ADD_TO_CART,
         item: cartItem,
       });
-      console.log("cartItem", cartItem);
       setLoading(false);
     }
   };
@@ -98,13 +97,13 @@ const SatelliteData = () => {
       channelId,
       boundaryData: queryParams.mapView || null,
       enableHyperResolution,
-      polygon: queryParams.polygon
+      polygon: queryParams.polygon,
     });
     if (res) {
       dispatch({
         type: actionType.SET_BOUND_POSITION,
         value: {
-          mapView: res.mapViewForPolygon ? null : (res.mapView || {}),
+          mapView: res.mapViewForPolygon ? null : res.mapView || {},
           position: {
             lat: res.centerLocation.latitude,
             lng: res.centerLocation.longitude,
@@ -130,12 +129,12 @@ const SatelliteData = () => {
     channelIdx,
     e
   ) => {
-    const newData = [...data]
+    const newData = [...data];
     newData[resolutionIdx].googleearthSatelliteData[
       satelliteIdx
     ].googleearthSatelliteDatasets[channelIdx].enableHyperResolution =
       e.target.checked;
-    setData(newData)
+    setData(newData);
   };
   return (
     <>
@@ -143,14 +142,16 @@ const SatelliteData = () => {
         data.map((e, resolutionIdx) => (
           <div id="satellite-sidebar">
             <Divider />
-            <p className="option-title">{e.textRender}{' '}({e.rangePixelSize} m)</p>
+            <p className="option-title">
+              {e.textRender} ({e.rangePixelSize} m)
+            </p>
             <List>
               {e.googleearthSatelliteData &&
                 e.googleearthSatelliteData.map((satellite, satelliteIdx) => (
                   <ListItem
                     key={satellite.id}
                     disablePadding
-                    sx={{ display: "block", marginBottom: '10px' }}
+                    sx={{ display: "block", marginBottom: "10px" }}
                   >
                     <Accordion>
                       <AccordionSummary
@@ -171,7 +172,7 @@ const SatelliteData = () => {
                                   component="div"
                                   disablePadding
                                   key={channel.id}
-                                  sx={{marginBottom: '5px'}}
+                                  sx={{ marginBottom: "5px" }}
                                 >
                                   <Accordion
                                     expanded={expanded === channel.id}
@@ -250,13 +251,16 @@ const SatelliteData = () => {
                                           </div>
                                           <IconButton
                                             onClick={() =>
-                                              handleListItemClick(channel.id, channel.enableHyperResolution)
+                                              handleListItemClick(
+                                                channel.id,
+                                                channel.enableHyperResolution
+                                              )
                                             }
                                           >
                                             <SatelliteIcon />
                                           </IconButton>
                                         </div>
-                                        <Button
+                                        {/* <Button
                                           variant="contained"
                                           fullWidth
                                           onClick={() =>
@@ -274,7 +278,7 @@ const SatelliteData = () => {
                                           ) : (
                                             "Add to cart"
                                           )}
-                                        </Button>
+                                        </Button> */}
                                       </div>
                                     </AccordionDetails>
                                   </Accordion>
