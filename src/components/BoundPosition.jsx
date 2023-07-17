@@ -23,6 +23,7 @@ const BoundPosition = () => {
   }, [boundPosition]);
 
   useEffect(() => {
+    console.log('testsss')
     if (boundPosition.position) {
       map.setView([boundPosition.position?.lat, boundPosition.position?.lng]);
     }
@@ -47,7 +48,7 @@ const BoundPosition = () => {
     <>
       {boundPosition.mapView ? (
         <>
-          <Rectangle bounds={renderMapView} pathOptions={{ color: "red" }} />
+          <RectangluseEffecte bounds={renderMapView} pathOptions={{ color: "red" }} />
           <Popup
             position={[boundPosition.position.lat, boundPosition.position.lng]}
           >

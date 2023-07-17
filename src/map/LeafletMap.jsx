@@ -19,6 +19,7 @@ import { getImageGoogleEarthEngine } from '../apis';
 
 function SetViewOnClick ( { center } )
 {
+    console.log('testglag')
     const map = useMap();
     map.setView( center, map.getZoom() );
 
@@ -77,9 +78,27 @@ const LeafletMap = () =>
     };
     useEffect( () =>
     {
-        const fetch = async () =>
-        {
-            var polygon = []
+        // const fetch = async () =>
+        // {
+        //     var polygon = []
+        //     if ( mapLayers.length > 0 )
+        //         polygon = mapLayers[ 0 ].latlngs.map( e =>
+        //         {
+        //             return [
+        //                 e.lng,
+        //                 e.lat
+        //             ]
+        //         } )
+        //     dispatch( {
+        //         type: actionType.SET_QUERY_PARAMS,
+        //         value: {
+        //             ...queryParams,
+        //             polygon
+        //         },
+        //     } );
+        // }
+        // fetch()
+         var polygon = []
             if ( mapLayers.length > 0 )
                 polygon = mapLayers[ 0 ].latlngs.map( e =>
                 {
@@ -95,29 +114,11 @@ const LeafletMap = () =>
                     polygon
                 },
             } );
-            const res = await getImageGoogleEarthEngine( {
-                channelId: queryParams.channelId,
-                enableHyperResolution: queryParams.enableHyperResolution,
-                polygon: JSON.stringify( polygon )
-            } );
-            if ( res )
-            {
-
-                dispatch( {
-                    type: actionType.SET_BOUND_POSITION,
-                    value: {
-                        mapView: res.mapView || {},
-                        position: {
-                            lat: res.centerLocation.latitude,
-                            lng: res.centerLocation.longitude,
-                        },
-                        linkSatellite: res.linkSatellite,
-                    },
-                } );
-            }
-        }
-        fetch()
+        console.log(mapLayers)
     }, [ mapLayers ] )
+    useEffect(() => {
+        console.log('reset center')
+    }, [center])
 
     return (
         <>
@@ -134,13 +135,14 @@ const LeafletMap = () =>
                         onCreated={ _onCreate }
                         onEdited={ _onEdited }
                         onDeleted={ _onDeleted }
+                        onDeleteStart={() => setMapLayers([])}
                         draw={ {
                             rectangle: false,
                             polyline: false,
                             circle: false,
                             circlemarker: false,
                             marker: false,
-                            polygon: mapLayers.length > 0 || queryParams.channelId == '' ? false : true
+                            polygon: mapLayers.length > 0 ? false : true
                         } }
                     />
                 </FeatureGroup>
@@ -157,7 +159,7 @@ const LeafletMap = () =>
                 <GoogleEarthEngine />
                 <BoundPosition />
                 {/* <GeneralInfo /> */ }
-                <SetViewOnClick center={ center } />
+                {/* <SetViewOnClick center={ center } /> */}
             </MapContainer>
         </>
     );

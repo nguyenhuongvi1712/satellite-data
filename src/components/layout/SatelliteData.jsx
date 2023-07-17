@@ -97,13 +97,14 @@ const SatelliteData = () => {
     const res = await getImageGoogleEarthEngine({
       channelId,
       boundaryData: queryParams.mapView || null,
-      enableHyperResolution
+      enableHyperResolution,
+      polygon: queryParams.polygon
     });
     if (res) {
       dispatch({
         type: actionType.SET_BOUND_POSITION,
         value: {
-          mapView: res.mapView || {},
+          mapView: res.mapViewForPolygon ? null : (res.mapView || {}),
           position: {
             lat: res.centerLocation.latitude,
             lng: res.centerLocation.longitude,

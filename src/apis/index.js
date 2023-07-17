@@ -123,9 +123,10 @@ export const getImageGoogleEarthEngine = async ({
 		if (enableHyperResolution) {
 			url += `isVisualizeImage=${enableHyperResolution}&`;
 		}
+        console.log('ptest', polygon)
 
 		if (polygon && polygon.length > 0) {
-			url += `polygon=${polygon}&`;
+			url += `polygon=${JSON.stringify(polygon)}&`;
             modeRender = 'POLYGON'
 		}
         url += `modeRender=${modeRender}`
