@@ -74,30 +74,11 @@ const LeafletMap = () =>
         Object.values( _layers ).map( ( { _leaflet_id } ) =>
         {
             setMapLayers( ( layers ) => layers.filter( ( l ) => l.id !== _leaflet_id ) );
-        } );
+        });
+        console.log(mapLayers);
     };
     useEffect( () =>
     {
-        // const fetch = async () =>
-        // {
-        //     var polygon = []
-        //     if ( mapLayers.length > 0 )
-        //         polygon = mapLayers[ 0 ].latlngs.map( e =>
-        //         {
-        //             return [
-        //                 e.lng,
-        //                 e.lat
-        //             ]
-        //         } )
-        //     dispatch( {
-        //         type: actionType.SET_QUERY_PARAMS,
-        //         value: {
-        //             ...queryParams,
-        //             polygon
-        //         },
-        //     } );
-        // }
-        // fetch()
          var polygon = []
             if ( mapLayers.length > 0 )
                 polygon = mapLayers[ 0 ].latlngs.map( e =>
